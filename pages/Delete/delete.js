@@ -29,7 +29,7 @@ function Delete( {route, navigation} ) {
         <Button
         type={'outline'}
         titleStyle={{color:'green'}}
-        buttonStyle={{borderColor='green'}}
+        buttonStyle={{borderColor:'green'}}
         title='Voltar'
         onPress={ () => navigation.navigate('Home') }
         ></Button>
