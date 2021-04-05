@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, TouchableHighlight, ScrollView, StyleSheet, Image } from 'react-native';
 import { Button } from 'react-native-elements';
 const backLogo = require('../../assets/logo_header.png');
+import { cnpjMask } from '../../masks/cnpj';
+import { phoneNumberMask } from '../../masks/phone';
 
 function Search({ route, navigation }) {
   const { id } = route.params;
@@ -41,10 +43,10 @@ function Search({ route, navigation }) {
                             <Text ellipsizeMode='middle' numberOfLines={1}>{allCompanies.company.name}</Text>
 
                             <Text style={{fontWeight:'bold', paddingTop:10}}>CNPJ: </Text>
-                            <Text>{allCompanies.company.document.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, "$1 $2 $3/$4-$5")}</Text>
+                            <Text>{cnpjMask(allCompanies.company.document)}</Text>
 
                             <Text style={{fontWeight:'bold', paddingTop:10}}>Fone: </Text>
-                            <Text>{allCompanies.company.phone}</Text>
+                            <Text>{phoneNumberMask(allCompanies.company.phone)}</Text>
 
                             <View style={styles.button}>
                                 <Button
