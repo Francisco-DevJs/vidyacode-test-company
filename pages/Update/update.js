@@ -4,14 +4,19 @@ import { Button } from 'react-native-elements';
 import { TextInput } from 'react-native-gesture-handler';
 import { TextInputMask } from 'react-native-masked-text';
 import { removeSpecialCaracters } from '../../masks/remove';
+import { phoneNumberMask } from '../../masks/phone';
+import { cnpjMask } from '../../masks/cnpj';
 
 
 function Update({ route, navigation }) {
-  const { companies } = route.params;
+  const { companies } = route.params
+  const formatedCnpj = cnpjMask(companies.document)
+  const formatedPhone = phoneNumberMask(companies.phone)
+
   const [error, setError] = useState('');
   const [name, setName] = useState(companies.name);
-  const [document, setDocument] = useState(companies.document);
-  const [phone, setPhone] = useState(companies.phone);
+  const [document, setDocument] = useState(formatedCnpj);
+  const [phone, setPhone] = useState(formatedPhone);
   const [address, setAddress] = useState(companies.address);
   
   // ------------------------------------------------ Validações
@@ -45,7 +50,7 @@ function Update({ route, navigation }) {
  
 // ------------------------------------------------ Função Update ** Faz unmask antes de enviar pro DB
   const updateCompanie = () => {
-      if( document.length != 14 && document.length != 18 || phone.length != 11 && phone.length != 15 || name.length == 0){
+      if( document.length != 18 || phone.length != 15 || name.length == 0){
         setError('*** Preenchimento incorreto')
         return false
       }
@@ -77,8 +82,8 @@ function Update({ route, navigation }) {
               <Text style={styles.title}>Empresa Atual - Modo Edição</Text>
               {/* <Text>Nome: {name.length}</Text>
               <Text>Doc: {document.length}</Text>
-              <Text>Tel: {phone.length}</Text> */}
-              <Text>Nome:</Text>
+              <Text>Tel: {phone.length}</Text>
+              <Text>Nome:</Text> */}
               <TextInput
                 style={styles.input}
                 placeholder={companies.name}

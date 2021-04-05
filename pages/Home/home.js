@@ -3,6 +3,8 @@ import { View, Text, ScrollView, StyleSheet, Image } from 'react-native';
 import { Button } from 'react-native-elements';
 import { TextInput } from 'react-native-gesture-handler';
 import Spinner from 'react-native-loading-spinner-overlay';
+import { cnpjMask } from '../../masks/cnpj';
+import { phoneNumberMask } from '../../masks/phone';
 const backLogo = require('../../assets/logo_header.png');
 
 function Home({ navigation }) {
@@ -75,10 +77,10 @@ function Home({ navigation }) {
                         <Text ellipsizeMode='middle' numberOfLines={1}>{item.name}</Text>
 
                         <Text style={styles.bolder}>CNPJ: </Text>
-                        <Text>{item.document}</Text>
+                        <Text>{cnpjMask(item.document)}</Text>
 
                         <Text style={styles.bolder}>Fone: </Text>
-                        <Text>{item.phone}</Text>
+                        <Text>{phoneNumberMask(item.phone)}</Text>
 
                         <View style={styles.button}>
                             <Button
@@ -112,7 +114,6 @@ function Home({ navigation }) {
   );
   }
   const styles = StyleSheet.create({
-    
     pageView:{ 
       flex: 1, 
       alignItems: 'center', 

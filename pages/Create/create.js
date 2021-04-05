@@ -69,7 +69,7 @@ function Update({ navigation }) {
     fetch(url, requestOptions)
         .then(response => response.json())
         .then(data => console.log(data)) 
-        .catch(error => console.log('erro ao fazer update', error))
+        .catch(error => console.log('erro ao fazer create', error))
         navigation.navigate('Home')
   }
     return (
